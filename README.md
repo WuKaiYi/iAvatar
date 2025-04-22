@@ -12,15 +12,15 @@ layout:
     visible: true
 ---
 
-# 🖥️ iAvatar Toolkit
+# 🖥️ LearningVerse
 
 <figure><img src=".gitbook/assets/1705301107227.jpg" alt=""><figcaption></figcaption></figure>
 
-## Welcome to iAvatar Documentation
+## Welcome to LearningVerse Documentation
 
-iAvatar is a comprehensive virtual avatar platform built on Unity that enables users to create personalized 3D avatars with real-time motion capture, network multiplayer interaction, AI conversation capabilities, and advanced 3D pose tracking.
+LearningVerse is a comprehensive virtual avatar platform built on Unity that enables users to create personalized 3D avatars with real-time motion capture, network multiplayer interaction, AI conversation capabilities, and advanced 3D pose tracking.
 
-This documentation provides detailed information about the iAvatar toolkit, including:
+This documentation provides detailed information about the LearningVerse platform, including:
 - Feature overview and capabilities
 - Technical implementation details
 - Installation and configuration guides
@@ -29,7 +29,7 @@ This documentation provides detailed information about the iAvatar toolkit, incl
 
 ## Video Demonstrations
 
-Check out these videos showcasing iAvatar's features:
+Check out these videos showcasing LearningVerse's features:
 
 {% embed url="https://youtu.be/uSEZH3_EBB4" %}
 
@@ -45,7 +45,7 @@ Check out these videos showcasing iAvatar's features:
 
 ## Download
 
-Download the iAvatar toolkit from:
+Download LearningVerse from:
 [https://drive.google.com/drive/folders/1jA99yZZk\_c94-wtABnM4UTvNkHtuEzHu](https://drive.google.com/drive/folders/1jA99yZZk_c94-wtABnM4UTvNkHtuEzHu)
 
 <table data-view="cards" data-full-width="false"><thead><tr><th></th><th data-type="content-ref"></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-type="files"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td>Download Link</td><td></td><td><a href="https://drive.google.com/drive/folders/1jA99yZZk_c94-wtABnM4UTvNkHtuEzHu?usp=sharing">https://drive.google.com/drive/folders/1jA99yZZk_c94-wtABnM4UTvNkHtuEzHu?usp=sharing</a></td><td><a href=".gitbook/assets/Learningverse_Logo 1.png">Learningverse_Logo 1.png</a></td><td><a href=".gitbook/assets/download-cloud.png">download-cloud.png</a></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>

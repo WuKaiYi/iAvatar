@@ -1,6 +1,6 @@
 # Table of contents
 
-* [🖥️ iAvatar Toolkit](README.md)
+* [🖥️ LearningVerse](README.md)
 
 ## 📚 Getting Started
 * [1. Project Overview](1-project-overview.md)
@@ -14,6 +14,22 @@
   * [Core Modules](2-system-architecture.md#core-modules)
   * [Data Flow](2-system-architecture.md#data-flow)
   * [Integration Points](2-system-architecture.md#integration-points)
+
+* [3. User Guide](3-user-guide.md)
+  * [快速入门](3-user-guide.md#快速入门)
+  * [功能详解](3-user-guide.md#功能详解)
+  * [常见问题解答](3-user-guide.md#常见问题解答)
+  * [安全指南](3-user-guide.md#安全指南)
+  * [技术支持](3-user-guide.md#技术支持)
+
+* [4. Developer Guide](4-developer-guide.md)
+  * [开发环境配置](4-developer-guide.md#开发环境配置)
+  * [API文档](4-developer-guide.md#api文档)
+  * [开发规范](4-developer-guide.md#开发规范)
+  * [示例代码](4-developer-guide.md#示例代码)
+  * [插件开发](4-developer-guide.md#插件开发)
+  * [调试指南](4-developer-guide.md#调试指南)
+  * [部署指南](4-developer-guide.md#部署指南)
 
 ## 🛠️ Core Features
 * [3. Features](3-features/README.md)
@@ -83,5 +99,5 @@
 * [11. Contact & Support](11-support.md)
 
 ## 📦 Downloads
-* [Download iAvatar Toolkit](download-link.md)
+* [Download LearningVerse](download-link.md)
 * [Resource Pack](images-and-3d-models.md)
