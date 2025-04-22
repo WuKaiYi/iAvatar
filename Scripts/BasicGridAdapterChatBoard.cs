@@ -1,0 +1,306 @@
+﻿/*
+ * * * * This bare-bones script was auto-generated * * * *
+ * The code commented with "/ * * /" demonstrates how data is retrieved and passed to the adapter, plus other common commands. You can remove/replace it once you've got the idea
+ * Complete it according to your specific use-case
+ * Consult the Example scripts if you get stuck, as they provide solutions to most common scenarios
+ * 
+ * Main terms to understand:
+ *		Model = class that contains the data associated with an item (title, content, icon etc.)
+ *		Views Holder = class that contains references to your views (Text, Image, MonoBehavior, etc.)
+ * 
+ * Default expected UI hiererchy:
+ *	  ...
+ *		-Canvas
+ *		  ...
+ *			-MyScrollViewAdapter
+ *				-Viewport
+ *					-Content
+ *				-Scrollbar (Optional)
+ *				-ItemPrefab (Optional)
+ * 
+ * Note: If using Visual Studio and opening generated scripts for the first time, sometimes Intellisense (autocompletion)
+ * won't work. This is a well-known bug and the solution is here: https://developercommunity.visualstudio.com/content/problem/130597/unity-intellisense-not-working-after-creating-new-1.html (or google "unity intellisense not working new script")
+ * 
+ * 
+ * Please read the manual under "/Docs", as it contains everything you need to know in order to get started, including FAQ
+ */
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using frame8.Logic.Misc.Other.Extensions;
+using Com.TheFallenGames.OSA.CustomAdapters.GridView;
+using Com.TheFallenGames.OSA.DataHelpers;
+using BestHTTP;
+using UnityStandardAssets.Effects;
+using Defective.JSON;
+using IMBX;
+using static IMBX.ImageLoader;
+//// using Unity.Barracuda;
+//using DungeonArchitect.Builders.Grid;
+
+// You should modify the namespace to your own or - if you're sure there won't ever be conflicts - remove it altogether
+namespace ChatBoard
+{
+    // There is 1 important callback you need to implement, apart from Start(): UpdateCellViewsHolder()
+    // See explanations below
+    public class BasicGridAdapterChatBoard : GridAdapter<GridParams, MyGridItemViewsHolder>
+    {
+        // Helper that stores data and notifies the adapter when items count changes
+        // Can be iterated and can also have its elements accessed by the [] operator
+        public SimpleDataHelper<MyGridItemModel> Data { get; private set; }
+        public Text content, username, Chatname, created_at, likes;
+        public RawImage avatar_pic;
+
+        #region GridAdapter implementation
+        protected override void Start()
+        {
+            Data = new SimpleDataHelper<MyGridItemModel>(this);
+
+            // Calling this initializes internal data and prepares the adapter to handle item count changes
+            base.Start();
+            content = transform.parent.Find("Area/content").GetComponent<Text>();
+            username = transform.parent.Find("Area/username").GetComponent<Text>();
+            Chatname = transform.parent.Find("Area/name").GetComponent<Text>();
+            created_at = transform.parent.Find("Area/created_at").GetComponent<Text>();
+            likes = transform.parent.Find("Area/btn - Like/likes").GetComponent<Text>();
+            avatar_pic = transform.parent.Find("Area/avatar_pic/cont - avatar/raw - avatar-image").GetComponent<RawImage>();
+          
+            Parameters.Grid.CellPrefab.gameObject.SetActive(false);
+            StartRefreshData();
+            // Retrieve the models from your data source and set the items count
+            /*
+			RetrieveDataAndUpdate(1500);
+			*/
+        }
+
+        private void StartRefreshData()
+        {
+           StartCoroutine(RefreshData());
+        }
+
+        public int ID;
+        public bool waitInput;
+        IEnumerator RefreshData()
+        {
+            while (true)
+            {
+                if (waitInput == false)
+                {
+                    var request = new HTTPRequest(new Uri(ServerConfig.host  + "/comment/comments/"+ID), HTTPMethods.Get, callback: OnRequestFinished);
+                   
+                    request.Send();
+
+                    yield return new WaitForSeconds(5);
+                }
+                else
+                {
+                    yield return null;
+                }
+            }
+        }
+
+        void OnRequestFinished(HTTPRequest req, HTTPResponse resp)
+        {
+          
+            StartCoroutine(FetchMoreItemsFromDataSourceAndUpdate(resp.DataAsText));
+        }
+ 
+
+        // This is called anytime a previously invisible item become visible, or after it's created, 
+        // or when anything that requires a refresh happens
+        // Here you bind the data from the model to the item's views
+        // *For the method's full description check the base implementation
+        protected override void UpdateCellViewsHolder(MyGridItemViewsHolder newOrRecycled)
+        {
+            // In this callback, "newOrRecycled.ItemIndex" is guaranteed to always reflect the
+            // index of item that should be represented by this views holder. You'll use this index
+            // to retrieve the model from your data set
+
+            MyGridItemModel model = Data[newOrRecycled.ItemIndex];
+
+            //newOrRecycled.name.text = model.name;
+            newOrRecycled.content.text = model.content;
+            Transform child = newOrRecycled.root.Find("Views/child");
+            for (int i = 1; i < child.childCount; i++)
+            {
+                Destroy(child.GetChild(i).gameObject);
+            }
+           if (model.json.count != 0)
+            {
+               GameObject game= Instantiate(child.GetChild(0).gameObject , child);
+                game.SetActive(true);
+            }
+
+
+        }
+
+        // This is the best place to clear an item's views in order to prepare it from being recycled, but this is not always needed, 
+        // especially if the views' values are being overwritten anyway. Instead, this can be used to, for example, cancel an image 
+        // download request, if it's still in progress when the item goes out of the viewport.
+        // <newItemIndex> will be non-negative if this item will be recycled as opposed to just being disabled
+        // *For the method's full description check the base implementation
+        /*
+		protected override void OnBeforeRecycleOrDisableCellViewsHolder(MyGridItemViewsHolder inRecycleBinOrVisible, int newItemIndex)
+		{
+			base.OnBeforeRecycleOrDisableCellViewsHolder(inRecycleBinOrVisible, newItemIndex);
+		}
+		*/
+        #endregion
+
+        // These are common data manipulation methods
+        // The list containing the models is managed by you. The adapter only manages the items' sizes and the count
+        // The adapter needs to be notified of any change that occurs in the data list. 
+        // For GridAdapters, only Refresh and ResetItems work for now
+        #region data manipulation
+        public void AddItemsAt(int index, IList<MyGridItemModel> items)
+        {
+            //Commented: this only works with Lists. ATM, Insert for Grids only works by manually changing the list and calling NotifyListChangedExternally() after
+            //Data.InsertItems(index, items);
+            Data.List.InsertRange(index, items);
+            Data.NotifyListChangedExternally();
+        }
+
+        public void RemoveItemsFrom(int index, int count)
+        {
+            //Commented: this only works with Lists. ATM, Remove for Grids only works by manually changing the list and calling NotifyListChangedExternally() after
+            //Data.RemoveRange(index, count);
+            Data.List.RemoveRange(index, count);
+            Data.NotifyListChangedExternally();
+        }
+
+        public void SetItems(IList<MyGridItemModel> items)
+        {
+            Data.ResetItems(items);
+        }
+        #endregion
+
+     
+
+        IEnumerator FetchMoreItemsFromDataSourceAndUpdate(string data)
+        {
+            Debug.Log(data);
+            JSONObject json = new JSONObject(data);
+            content.text = ServerConfig.ParseUnicode(json["content"].stringValue );
+            username.text = ServerConfig.ParseUnicode(json["user"]["username"].stringValue);
+            Chatname.text = ServerConfig.ParseUnicode(json["name"].stringValue);
+            created_at.text = ServerConfig.ParseUnicode(json["created_at"].stringValue);
+            likes.text = ServerConfig.ParseUnicode(""+json["likes"].intValue);
+            IMBX.ImageLoader imageLoader = IMBX.ImageLoader.Create();
+
+            imageLoader.Load(0, json["user"]["avatar_pic"].stringValue, json["user"]["username"].stringValue, "user_avatar", CacheMode.UseCached, (texture, index) =>
+            {
+                if (texture != null)
+                {
+                    avatar_pic.texture = texture;
+                }
+            }, 0, 10);
+            // Simulating data retrieving delay
+            yield return new WaitForSeconds(.5f);
+
+            var newItems = new MyGridItemModel[json["child_comments"].count];
+
+            // Retrieve your data here
+
+            for (int i = 0; i < json["child_comments"].count; ++i)
+            {
+
+                var model = new MyGridItemModel()
+                {
+
+                    content = json["child_comments"][i]["content"].stringValue,
+                    json =json["child_comments"][i]["child_comments"],
+
+                };
+
+
+
+
+                newItems[i] = model;
+            }
+
+
+            OnDataRetrieved(newItems);
+        }
+
+        void OnDataRetrieved(MyGridItemModel[] newItems)
+        {
+            //Commented: this only works with Lists. ATM, Insert for Grids only works by manually changing the list and calling NotifyListChangedExternally() after
+            // Data.InsertItemsAtEnd(newItems);
+
+            Data.ResetItems(newItems);
+            Data.NotifyListChangedExternally();
+        }
+    }
+
+
+    // Class containing the data associated with an item
+    public class MyGridItemModel
+    {
+
+        public string content, username, name, created_at, likes;
+        public JSONObject json;
+
+
+    }
+
+
+    // This class keeps references to an item's views.
+    // Your views holder should extend BaseItemViewsHolder for ListViews and CellViewsHolder for GridViews
+    // The cell views holder should have a single child (usually named "Views"), which contains the actual 
+    // UI elements. A cell's root is never disabled - when a cell is removed, only its "views" GameObject will be disabled
+    public class MyGridItemViewsHolder : CellViewsHolder
+    {
+
+        public Text content, username, name, created_at, likes;
+        public RawImage avatar_pic;
+
+
+
+        // Retrieving the views from the item's root GameObject
+        public override void CollectViews()
+        {
+            base.CollectViews();
+            views.GetComponentAtPath("content", out content);
+            views.GetComponentAtPath("created_at", out created_at);
+            views.GetComponentAtPath("username", out username);
+            views.GetComponentAtPath("name", out name);
+            views.GetComponentAtPath("btn - Like/likes", out likes);
+            views.GetComponentAtPath("avatar_pic", out avatar_pic);
+
+        }
+
+        // This is usually the only child of the item's root and it's called "Views". 
+        // That's what the default implementation will look for, but just for flexibility, 
+        // this callback is provided, in case it's named differently or there's more than 1 child 
+        // *See GridExample.cs for more info
+
+        //protected override RectTransform GetViews()
+        //{ return root.Find("Views").transform as RectTransform; }
+
+
+        // Override this if you have children layout groups. They need to be marked for rebuild when this callback is fired
+        /*
+		public override void MarkForRebuild()
+		{
+			base.MarkForRebuild();
+
+			LayoutRebuilder.MarkLayoutForRebuild(yourChildLayout1);
+			LayoutRebuilder.MarkLayoutForRebuild(yourChildLayout2);
+			AChildSizeFitter.enabled = true;
+		}
+		*/
+
+        // Override this if you've also overridden MarkForRebuild()
+        /*
+		public override void UnmarkForRebuild()
+		{
+			AChildSizeFitter.enabled = false;
+
+			base.UnmarkForRebuild();
+		}
+		*/
+    }
+}

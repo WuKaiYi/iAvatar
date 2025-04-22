@@ -1,0 +1,85 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+public class WebCamInput : MonoBehaviour
+{
+    [SerializeField] string webCamName;
+    [SerializeField] Vector2 webCamResolution = new Vector2(1920, 1080);
+    [SerializeField] Texture staticInput;
+
+  public  RawImage RawImage;
+
+    // Provide input image Texture.
+    public Texture inputImageTexture
+    {
+        get
+        {
+            if (staticInput != null) return staticInput;
+            return inputRT;
+        }
+    }
+
+    WebCamTexture webCamTexture;
+    RenderTexture inputRT;
+    public void ChangeScence()
+    {
+        webCamTexture.Stop();
+    }
+    void Start()
+    {
+        //webCamTexture.Stop();
+        if (GameObject.Find("CamRawImage") != null)
+        {
+            RawImage = GameObject.Find("CamRawImage").GetComponent<RawImage>();
+        }
+
+        webCamName = WebCamTexture.devices[PlayerPrefs.GetInt("Camera", 0)].name;
+        if (staticInput == null)
+        {
+            webCamTexture = new WebCamTexture(webCamName, (int)webCamResolution.x, (int)webCamResolution.y);
+          //  webCamTexture.Stop();
+            webCamTexture.Play();
+            RawImage.texture = webCamTexture;
+        }
+
+        inputRT = new RenderTexture((int)webCamResolution.x, (int)webCamResolution.y, 0);
+    }
+
+    void Update()
+    {
+        if (webCamTexture == null) return;
+        //  if (staticInput != null) return;
+        if (!webCamTexture.didUpdateThisFrame) return;
+
+        var aspect1 = (float)webCamTexture.width / webCamTexture.height;
+        var aspect2 = (float)inputRT.width / inputRT.height;
+        var aspectGap = aspect2 / aspect1;
+
+        var vMirrored = webCamTexture.videoVerticallyMirrored;
+        var scale = new Vector2(aspectGap, vMirrored ? -1 : 1);
+        var offset = new Vector2((1 - aspectGap) / 2, vMirrored ? 1 : 0);
+       
+        Graphics.Blit(webCamTexture, inputRT, scale, offset);
+    }
+    private void OnApplicationQuit()
+    {
+        webCamTexture.Stop();
+    }
+
+    private void OnDisable()
+    {
+        webCamTexture.Stop();
+    }
+
+    private void OnEnable()
+    {
+        if (webCamTexture == null) return;
+        webCamTexture.Play();
+    }
+
+    void OnDestroy()
+    {
+      
+        if (webCamTexture != null) Destroy(webCamTexture);
+        if (inputRT != null) Destroy(inputRT);
+    }
+}
