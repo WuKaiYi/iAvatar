@@ -52,7 +52,7 @@ Download LearningVerse from:
 
 # Table of contents
 
-* [🖥️ iAvatar Toolkit](README.md)
+* [🖥️ LearningVerse](README.md)
 * [1. Project Overview](1-project-overview.md)
 * [2. System Architecture](2-system-architecture.md)
 * [3. Features](3-features/README.md)
@@ -74,9 +74,9 @@ Download LearningVerse from:
 
 ## Introduction
 
-iAvatar is a comprehensive virtual avatar platform developed with Unity that enables users to create and interact with customized 3D avatars. The platform integrates real-time motion capture, network multiplayer capabilities, AI-powered conversations, and advanced 3D pose tracking to deliver an immersive virtual experience.
+LearningVerse is a comprehensive virtual avatar platform developed with Unity that enables users to create and interact with customized 3D avatars. The platform integrates real-time motion capture, network multiplayer capabilities, AI-powered conversations, and advanced 3D pose tracking to deliver an immersive virtual experience.
 
-<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption>iAvatar Platform Interface</figcaption></figure>
+<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption>LearningVerse Platform Interface</figcaption></figure>
 
 ## Key Features
 
@@ -112,7 +112,7 @@ Provide intuitive user interfaces and scene transitions:
 
 ## Use Cases
 
-The iAvatar platform is designed for various applications:
+The LearningVerse platform is designed for various applications:
 
 1. **Virtual Education**: Create interactive learning environments with AI tutors
 2. **Remote Collaboration**: Enable geographically distributed teams to work together in virtual spaces
@@ -133,9 +133,9 @@ The iAvatar platform is designed for various applications:
 
 ## Architecture Overview
 
-The iAvatar system is built on a modular architecture that enables flexibility, scalability, and maintainability. The platform is composed of five core modules that work together to deliver a comprehensive virtual avatar experience.
+The LearningVerse system is built on a modular architecture that enables flexibility, scalability, and maintainability. The platform is composed of five core modules that work together to deliver a comprehensive virtual avatar experience.
 
-<figure><img src=".gitbook/assets/image (13).png" alt=""><figcaption>iAvatar System Architecture</figcaption></figure>
+<figure><img src=".gitbook/assets/image (13).png" alt=""><figcaption>LearningVerse System Architecture</figcaption></figure>
 
 ## Core Modules
 
@@ -165,7 +165,7 @@ Responsible for processing camera input, estimating poses, and mapping movements
 - VNectBarracudaRunner
 - WebCamInput
 - PoseVisualizer
-- iAvatarPose3D
+- LearningVersePose3D
 
 ### 3. Network Communication Module
 
@@ -211,7 +211,7 @@ Handles scene transitions, UI interactions, and user data management:
 
 ## Data Flow
 
-The iAvatar system processes data through the following flow:
+The LearningVerse system processes data through the following flow:
 
 1. **Input Collection**: Camera feeds, user inputs, and network data are collected
 2. **Processing**: Data is processed by the appropriate modules (e.g., pose estimation, dialogue processing)
@@ -243,7 +243,7 @@ public interface IAIConversationService
 
 ## Deployment Architecture
 
-The iAvatar platform can be deployed in various configurations:
+The LearningVerse platform can be deployed in various configurations:
 
 - **Standalone Application**: All components run locally on the user's device
 - **Client-Server**: Core processing happens on the server, with clients handling rendering and input
@@ -255,7 +255,7 @@ The iAvatar platform can be deployed in various configurations:
 
 ## Feature Overview
 
-The iAvatar platform offers a comprehensive set of features designed to create immersive virtual avatar experiences. This section details each major feature set and provides implementation examples.
+The LearningVerse platform offers a comprehensive set of features designed to create immersive virtual avatar experiences. This section details each major feature set and provides implementation examples.
 
 <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption>Feature Overview</figcaption></figure>
 
@@ -282,7 +282,7 @@ The following code example demonstrates how the different feature sets can be in
 
 ```csharp
 // Sample integration of major features
-public class iAvatarManager : MonoBehaviour
+public class LearningVerseManager : MonoBehaviour
 {
     // Avatar System
     [SerializeField] private AvatarUI avatarUI;
