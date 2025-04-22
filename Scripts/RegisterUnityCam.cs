@@ -10,7 +10,7 @@ public class RegisterUnityCam : MonoBehaviour
     public void Register()
     {
         // ExecuteCommand(Application.streamingAssetsPath + "/RunMe First/x32/Register.bat",5);
-        RunMyBat(Application.streamingAssetsPath+ "/Install/BAT/Installiavatar.bat");
+        RunMyBat(Application.streamingAssetsPath+ "/Install/BAT/InstallLearningverse.bat");
 
     }
 
@@ -41,15 +41,15 @@ public class RegisterUnityCam : MonoBehaviour
         psi.Verb = "runas"; //This is what actually runs the command as administrator
       //  psi.Arguments ="/c"+ @path;
 
-        //ÊÇ·ñÊ¹ÓÃ²Ù×÷ÏµÍ³shellÆô¶¯
+        //ï¿½Ç·ï¿½Ê¹ï¿½Ã²ï¿½ï¿½ï¿½ÏµÍ³shellï¿½ï¿½ï¿½ï¿½
         psi.UseShellExecute = true;
-              // ½ÓÊÜÀ´×Ôµ÷ÓÃ³ÌÐòµÄÊäÈëÐÅÏ¢
+              // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
       //  psi.RedirectStandardInput = true;
-        //Êä³öÐÅÏ¢
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
       //  psi.RedirectStandardOutput = true;
-        // Êä³ö´íÎó
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       //  psi.RedirectStandardError = true;
-        //²»ÏÔÊ¾³ÌÐò´°¿Ú
+        //ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ò´°¿ï¿½
        
 
 
@@ -63,16 +63,16 @@ public class RegisterUnityCam : MonoBehaviour
             {
                 if (sw.BaseStream.CanWrite)
                 {
-                    sw.WriteLine("iAvatarToolkitCamer");
+                    sw.WriteLine("LearningverseToolkitCamer");
                     //sw.WriteLine("cd " + Application.persistentDataPath + "/forge");
                     //sw.WriteLine("gradlew.bat - cleanCache - clean - setupDecompWorkspace--refresh - dependencies");
                 }
             }
             */
           //  StreamWriter sIn = process.StandardInput;
-         //   sIn.WriteLine("iAvatarToolkitCamera");
+         //   sIn.WriteLine("LearningverseToolkitCamera");
 
-            // process.StandardInput.WriteLine("iAvatarToolkitCamera");
+            // process.StandardInput.WriteLine("LearningverseToolkitCamera");
           //  process. StandardInput.WriteLine("Test");
           //  process.StandardInput.AutoFlush = true;
             process.WaitForExit();

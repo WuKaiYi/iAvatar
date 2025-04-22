@@ -54,7 +54,7 @@ public class iAvarar_pose : MonoBehaviour
 //        faceMeshMaterial = new Material(faceShader);
 //        handMaterial = new Material(handShader);
 
-//     //   if(iAvatarVRIK==null)
+//     //   if(LearningverseVRIK==null)
 //        barracudaRunner.InitVNectModel(barracudaRunner.VNectModel, new ConfigurationSetting());
 
 //    }
@@ -100,11 +100,11 @@ public class iAvarar_pose : MonoBehaviour
 //        //  debugpose = new float4[holisticPipeline.leftHandVertexBuffer];
 //        holisticPipeline.rightHandVertexBuffer.GetData(debughandposeR);
         
-//        //   if (iAvatarVRIK == null)
+//        //   if (LearningverseVRIK == null)
 //            barracudaRunner.PredictPose(debugpose, debughandposeL, debughandposeR);
 //      //  else
 //        {
-//     //       iAvatarVRIK.PredictPose(debugpose, debughandposeL, debughandposeR);
+//     //       LearningverseVRIK.PredictPose(debugpose, debughandposeL, debughandposeR);
 //        }
         
 //        if (unityChanController != null)
@@ -132,7 +132,7 @@ public class iAvarar_pose : MonoBehaviour
      
 //    }
 //    public VNectBarracudaRunner barracudaRunner;
-//  //  public iAvatarVRIK iAvatarVRIK;
+//  //  public LearningverseVRIK LearningverseVRIK;
 
 //    void PoseRender()
 //    {

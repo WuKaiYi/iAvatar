@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class iAvatarVirtualCam : MonoBehaviour
+public class LearningverseVirtualCam : MonoBehaviour
 {
     public int CaptureResolutionWidth = 640, CaptureResolutionHeight = 480;
     public Camera CaptureCamera1;

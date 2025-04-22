@@ -3,21 +3,21 @@
 //using System.Collections.Generic;
 //using UnityEngine;
 //using UnityEngine.SceneManagement;
-//public class iAvatarToolkitStart : MonoBehaviour
+//public class LearningverseToolkitStart : MonoBehaviour
 //{
-//    GameObject avatar,iavatar;
+//    GameObject avatar,Learningverse;
 //    Material material;
 //    Texture texture;
 
 //    public GameObject AIModel;
-//    public GameObject iAvatarF, iAvatarM;
+//    public GameObject LearningverseF, LearningverseM;
 
 //    public Cinemachine.CinemachineVirtualCamera CinemachineVirtualCamera;
 
 //  //  public VNectBarracudaRunner VNectBarracudaRunner;
 //   // public
 
-//   public  Transform iAvatarFT, iAvatarMT;
+//   public  Transform LearningverseFT, LearningverseMT;
 
 //    public Vector3 stagepos;
 //    public Vector3 stageroat;
@@ -63,39 +63,39 @@
 
 //        if (avatar.GetComponent<Animator>().avatar.name == "FeminineAnimationAvatar")
 //        {
-//            CinemachineVirtualCamera.LookAt = iAvatarFT;
-//            iavatar = iAvatarF;
-//            AIModel.GetComponent<VNectBarracudaRunner>().VNectModel = iAvatarF.GetComponent<VNectModel>();
+//            CinemachineVirtualCamera.LookAt = LearningverseFT;
+//            Learningverse = LearningverseF;
+//            AIModel.GetComponent<VNectBarracudaRunner>().VNectModel = LearningverseF.GetComponent<VNectModel>();
 //        }
 //        else
 //        {
-//            CinemachineVirtualCamera.LookAt = iAvatarMT;
-//            iavatar = iAvatarM;
-//            AIModel.GetComponent<VNectBarracudaRunner>().VNectModel = iAvatarM.GetComponent<VNectModel>();
+//            CinemachineVirtualCamera.LookAt = LearningverseMT;
+//            Learningverse = LearningverseM;
+//            AIModel.GetComponent<VNectBarracudaRunner>().VNectModel = LearningverseM.GetComponent<VNectModel>();
 
 //        }
-//        iavatar.SetActive(true);
+//        Learningverse.SetActive(true);
 
 
 
 //        Texture texture = avatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.mainTexture;
-//        iavatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>(). material.mainTexture = texture;
+//        Learningverse.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>(). material.mainTexture = texture;
 
-//        iavatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().sharedMesh = 
+//        Learningverse.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().sharedMesh = 
 //            avatar.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().sharedMesh;
 
 //        if (avatar.transform.childCount > 2)
 //        {
-//            iavatar.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.mainTexture =
+//            Learningverse.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.mainTexture =
 //                avatar.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.mainTexture;
 
-//            iavatar.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().sharedMesh =
+//            Learningverse.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().sharedMesh =
 //                avatar.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().sharedMesh;
 
 //        }
 //        else
 //        {
-//            iavatar.transform.GetChild(1).gameObject.SetActive(false);
+//            Learningverse.transform.GetChild(1).gameObject.SetActive(false);
 //        }
 
 //        avatar.SetActive(false);
@@ -117,13 +117,13 @@
 //        else
 //        {
 
-//            if (iAvatarF.activeSelf)
+//            if (LearningverseF.activeSelf)
 //            {
-//                CinemachineVirtualCamera.LookAt = iAvatarFT;
+//                CinemachineVirtualCamera.LookAt = LearningverseFT;
 //            }
 //            else
 //            {
-//                CinemachineVirtualCamera.LookAt = iAvatarMT;
+//                CinemachineVirtualCamera.LookAt = LearningverseMT;
 //            }
 
 //            var CinemachineTransposer = CinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();

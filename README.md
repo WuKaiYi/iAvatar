@@ -225,7 +225,7 @@ The system provides several integration points for extending functionality:
 
 ```csharp
 // Example: Avatar System Integration
-public interface IAvatarProvider
+public interface LearningverseProvider
 {
     GameObject LoadAvatar(string avatarUrl);
     void UpdateAvatar(GameObject avatar, Dictionary<string, object> properties);
